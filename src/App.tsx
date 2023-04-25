@@ -46,9 +46,7 @@ const App = () => {
   };
 
   const firstNumberDisplay = () => {
-    if (result !== null) {
-      return <Text>{result.toString()}</Text>;
-    } else if (firstNumber) {
+    if (firstNumber) {
       return <Text>{firstNumber}</Text>;
     } else if (firstNumber === '') {
       return <Text>{'0'}</Text>;
@@ -59,21 +57,25 @@ const App = () => {
     switch (operation) {
       case '+': {
         clear();
+        setFirstNumber(parseInt(secondNumber) + parseInt(firstNumber));
         setResult(parseInt(secondNumber) + parseInt(firstNumber));
         break;
       }
       case '-': {
         clear();
+        setFirstNumber(parseInt(secondNumber) - parseInt(firstNumber));
         setResult(parseInt(secondNumber) - parseInt(firstNumber));
         break;
       }
       case '*': {
         clear();
+        setFirstNumber(parseInt(secondNumber) * parseInt(firstNumber));
         setResult(parseInt(secondNumber) * parseInt(firstNumber));
         break;
       }
       case '/': {
         clear();
+        setFirstNumber(parseInt(secondNumber) / parseInt(firstNumber));
         setResult(parseInt(secondNumber) / parseInt(firstNumber));
         break;
       }
