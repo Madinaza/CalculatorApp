@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -22,10 +23,15 @@ const App = () => {
   const [result, setResult] = useState<Number | null>(null); //null convert elemek ucun method;
 
   useEffect(() => {
-    if (result === Infinity) {
-      setResult('ERROR'); //ve ya error//
+    if (result === Infinity || firstNumber === Infinity) {
+      setResult('error'); //ve ya error//
+      setFirstNumber('error');
     }
-  }, [result]);
+    if (result === 'NaN' || firstNumber === 'NaN') {
+      setResult('error'); //ve ya error//
+      setFirstNumber('error');
+    }
+  }, [result, firstNumber]);
 
   const handleNumberPress = (buttonValue: string) => {
     if (firstNumber.length < 10) {
@@ -50,6 +56,8 @@ const App = () => {
       return <Text>{firstNumber}</Text>;
     } else if (firstNumber === '') {
       return <Text>{'0'}</Text>;
+    } else if (firstNumber == '0') {
+      return <Text>{firstNumber}</Text>;
     }
   };
 
@@ -57,25 +65,25 @@ const App = () => {
     switch (operation) {
       case '+': {
         clear();
-        setFirstNumber(parseInt(secondNumber) + parseInt(firstNumber));
+        setFirstNumber(String(parseInt(secondNumber) + parseInt(firstNumber)));
         setResult(parseInt(secondNumber) + parseInt(firstNumber));
         break;
       }
       case '-': {
         clear();
-        setFirstNumber(parseInt(secondNumber) - parseInt(firstNumber));
+        setFirstNumber(String(parseInt(secondNumber) - parseInt(firstNumber)));
         setResult(parseInt(secondNumber) - parseInt(firstNumber));
         break;
       }
       case '*': {
         clear();
-        setFirstNumber(parseInt(secondNumber) * parseInt(firstNumber));
+        setFirstNumber(String(parseInt(secondNumber) * parseInt(firstNumber)));
         setResult(parseInt(secondNumber) * parseInt(firstNumber));
         break;
       }
       case '/': {
         clear();
-        setFirstNumber(parseInt(secondNumber) / parseInt(firstNumber));
+        setFirstNumber(String(parseInt(secondNumber) / parseInt(firstNumber)));
         setResult(parseInt(secondNumber) / parseInt(firstNumber));
         break;
       }
@@ -105,7 +113,7 @@ const App = () => {
             // })} */}
             {/* Companent kimi yaratdim sadece islemedi sildim */}
 
-            {numbers.map((item, index) => {
+            {numbers.map(item => {
               return (
                 <TouchableOpacity
                   style={styles.buttons}
