@@ -23,12 +23,12 @@ const App = () => {
   const [result, setResult] = useState<Number | null>(null); //null convert elemek ucun method;
 
   useEffect(() => {
-    if (result === Infinity || firstNumber === Infinity) {
-      setResult('error'); //ve ya error//
+    if (result === Infinity || firstNumber === String(Infinity)) {
+      setResult(parseInt('error')); //ve ya error//
       setFirstNumber('error');
     }
-    if (result === 'NaN' || firstNumber === 'NaN') {
-      setResult('error'); //ve ya error//
+    if (result === parseInt('NaN') || firstNumber === 'NaN') {
+      setResult(parseInt('error')); //ve ya error//
       setFirstNumber('error');
     }
   }, [result, firstNumber]);
@@ -56,7 +56,7 @@ const App = () => {
       return <Text>{firstNumber}</Text>;
     } else if (firstNumber === '') {
       return <Text>{'0'}</Text>;
-    } else if (firstNumber == '0') {
+    } else if (firstNumber === '0') {
       return <Text>{firstNumber}</Text>;
     }
   };
